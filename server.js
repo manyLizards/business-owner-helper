@@ -2,7 +2,15 @@
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
 const sql2 = require('mysql2');
-const db = mysql.createconnection
+const db = mysql.createconnection(
+    {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'owner_db'
+    },
+    console.log('Connected to the owner_db database.')
+)
 
 //create array of questions
 const menu = [
@@ -24,7 +32,7 @@ function startQuestions () {
     .prompt(menu)
     .then((answer) => {
         if (answer === "view all departments") {
-            
+            return 
         }
         if (answer === "view all roles") {
 
@@ -63,7 +71,7 @@ function startQuestions () {
 
         }
         else {
-            
+
         }
     })
 }
