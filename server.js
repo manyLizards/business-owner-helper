@@ -35,15 +35,15 @@ function startQuestions () {
     .then((answer) => {
         if (answer === "view all departments") {
             console.table('department')
-            .prompt(menu)
+            startQuestions()
         }
         if (answer === "view all roles") {
             console.table('roles')
-            .prompt(menu)
+            startQuestions()
         }
         if (answer === "view all employees") {
             console.table('employees')
-            .prompt(menu)
+            startQuestions()
         }
         if (answer === "add department") {
             
