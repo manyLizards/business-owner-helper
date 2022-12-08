@@ -15,8 +15,8 @@ const db = mysql.createconnection(
 //create array of questions
 const menu = [
     {
-        type: 'checkbox',
-        name: 'first-option',
+        type: 'list',
+        name: 'menu',
         message: "Which action would you like to do?",
         choices: ["view all departments", "view all roles", "view all employees", "add department", "add role", "add employee", "update employee role", "update employee manager", "view employees by manager", "view employees by department", "delete department", "delete role", "delete employee", "view department budget"]
     }
@@ -32,13 +32,13 @@ function startQuestions () {
     .prompt(menu)
     .then((answer) => {
         if (answer === "view all departments") {
-            return 
+            console.table('department')
         }
         if (answer === "view all roles") {
-
+            console.table('roles')
         }
         if (answer === "view all employees") {
-
+            console.table('employees')
         }
         if (answer === "add department") {
 
