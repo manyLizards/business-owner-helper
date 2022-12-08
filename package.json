@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "repository": {
-    "type": "git",
+    "type": "module",
     "url": "git+https://github.com/manyLizards/business-owner-helper.git"
   },
   "author": "Jordan Barringer",
@@ -19,6 +19,7 @@
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^9.1.4",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "nanoid": "^3.3.4"
   }
 }

@@ -2,6 +2,8 @@
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
 const sql2 = require('mysql2');
+
+//instill a link to the database
 const db = mysql.createconnection(
     {
         host: 'localhost',
@@ -26,22 +28,25 @@ function request() {
     inquirer
     .prompt()
 }
-
+//Create a function for the 
 function startQuestions () {
     inquirer
     .prompt(menu)
     .then((answer) => {
         if (answer === "view all departments") {
             console.table('department')
+            .prompt(menu)
         }
         if (answer === "view all roles") {
             console.table('roles')
+            .prompt(menu)
         }
         if (answer === "view all employees") {
             console.table('employees')
+            .prompt(menu)
         }
         if (answer === "add department") {
-
+            
         }
         if (answer === "add role") {
 
