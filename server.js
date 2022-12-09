@@ -3,6 +3,7 @@ const consoleTable = require('console.table');
 const inquirer = require('inquirer');
 const sql2 = require('mysql2');
 const Connection = require('mysql2/typings/mysql/lib/Connection');
+const { resourceLimits } = require('worker_threads');
 
 //instill a link to the database
 const db = mysql.createconnection(
@@ -32,11 +33,26 @@ const addDept = [
         message: "What is the name of the new department?",
     }
 ]
+//Create an array for the questions to add a role
+const addRole = [
+    {
+        type: 'input',
+        name: 'newRole',
+        message: "What is the new role?"
+    },
+    {
+        type: 'input',
+        name: 'salary',
+        message: "How much will a person in this role be making?"
+    },
+    {
+        type: 'list',
+        name: 'roleDept',
+        message: "Which department will this role be in?",
+        choices: result.map((departments) => departments.name)
+    }
 
-function request() {
-    inquirer
-    .prompt()
-}
+]
 
 //Create a function to start the menu and run the questions
 function startQuestions () {
@@ -64,7 +80,8 @@ function startQuestions () {
             startQuestions()
         }
         if (answer === "add role") {
-
+            inquirer
+            .prompt(addRole)
         }
         if (answer === "add employee") {
 
