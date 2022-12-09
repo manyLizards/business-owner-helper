@@ -2,6 +2,7 @@
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
 const sql2 = require('mysql2');
+const Connection = require('mysql2/typings/mysql/lib/Connection');
 
 //instill a link to the database
 const db = mysql.createconnection(
@@ -55,7 +56,12 @@ function startQuestions () {
             startQuestions()
         }
         if (answer === "add department") {
-            
+            inquirer
+            .prompt(addDept)
+            .then((answer) => db.query("INSERT INTO departments SET ?", {
+                name: answer.addDept
+            }))
+            startQuestions()
         }
         if (answer === "add role") {
 
