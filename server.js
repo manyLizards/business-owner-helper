@@ -14,7 +14,7 @@ const db = mysql.createconnection(
     console.log('Connected to the owner_db database.')
 )
 
-//create array of questions
+//create array for the menu question
 const menu = [
     {
         type: 'list',
@@ -23,12 +23,21 @@ const menu = [
         choices: ["view all departments", "view all roles", "view all employees", "add department", "add role", "add employee", "update employee role", "update employee manager", "view employees by manager", "view employees by department", "delete department", "delete role", "delete employee", "view department budget"]
     }
 ]
+//Create an array for the question to add the department
+const addDept = [
+    {
+        type: 'input',
+        name: 'departmentName',
+        message: "What is the name of the new department?",
+    }
+]
 
 function request() {
     inquirer
     .prompt()
 }
-//Create a function for the 
+
+//Create a function to start the menu and run the questions
 function startQuestions () {
     inquirer
     .prompt(menu)
