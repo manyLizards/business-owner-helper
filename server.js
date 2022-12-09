@@ -2,15 +2,16 @@
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
 const sql2 = require('mysql2');
-const Connection = require('mysql2/typings/mysql/lib/Connection');
+const connection = require('mysql2/typings/mysql/lib/Connection');
 const { resourceLimits } = require('worker_threads');
 
 //instill a link to the database
 const db = mysql.createconnection(
     {
         host: 'localhost',
+        port: 1234,
         user: 'root',
-        password: '',
+        password: '1ring2rule-them-all',
         database: 'owner_db'
     },
     console.log('Connected to the owner_db database.')
@@ -37,7 +38,7 @@ const addDept = [
 const addRole = [
     {
         type: 'input',
-        name: 'newRole',
+        name: 'roleName',
         message: "What is the new role?"
     },
     {
@@ -49,7 +50,15 @@ const addRole = [
         type: 'list',
         name: 'roleDept',
         message: "Which department will this role be in?",
-        choices: result.map((departments) => departments.name)
+        choices: function () {
+            var arrChoices = [];
+
+            for (var i = 0; i < result.length; i++) {
+                arrChoices.push(result[i].roleDept);
+            }
+
+            return arrChoices;
+        }
     }
 
 ]
@@ -75,13 +84,19 @@ function startQuestions () {
             inquirer
             .prompt(addDept)
             .then((answer) => db.query("INSERT INTO departments SET ?", {
-                name: answer.addDept
+                name: answer.departmentName
             }))
             startQuestions()
         }
         if (answer === "add role") {
             inquirer
             .prompt(addRole)
+            .then((answer) => db.query("INSERT INTO roles SET ?", {
+                title: answer.roleName,
+                salary: parseInt(answer.salary),
+                department_id: parseInt(result[0].id)
+            }))
+            startQuestions()
         }
         if (answer === "add employee") {
 
