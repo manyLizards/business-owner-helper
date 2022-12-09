@@ -60,7 +60,40 @@ const addRole = [
             return arrChoices;
         }
     }
+]
 
+//create an array of questions to add an employee
+const newHire = [
+    {
+        type: 'input',
+        name: 'employee-first',
+        message: "What is the new employee's first name?"
+    },
+    {
+        type: 'input',
+        name: 'employee-last',
+        message: "What is the new employee's last name?"
+    },
+    {
+        type: 'list',
+        name: 'empRole',
+        message: "What is the role for the new employee?",
+        choices: function () {
+            var arrChoices = [];
+
+            for (var i = 0; i < result.length; i++) {
+                arrChoices.push(result[i].empRole);
+            }
+
+            return arrChoices;
+        }
+    },
+    {
+        type: 'list',
+        name: "empManager",
+        message: "Who is the manager for this employee?",
+        choices: 
+    }
 ]
 
 //Create a function to start the menu and run the questions
@@ -99,7 +132,14 @@ function startQuestions () {
             startQuestions()
         }
         if (answer === "add employee") {
+            inquirer
+            .prompt(newHire)
+            .then((answer) => db.query("INSERT INTO employees SET ?", {
+                first_name: answer.employee_first,
+                last_name: answer.employee_last,
+                role_id: answer.empRole,
 
+            }))
         }
         if (answer === "update employee role") {
 
